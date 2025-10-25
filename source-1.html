@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wann hsoting</title>
+    <style>
+        :root {
+            --cyber-blue: #00f0ff;
+            --cyber-purple: #bd00ff;
+            --cyber-pink: #ff00f7;
+            --dark: #0a0a12;
+            --light: #f0f0f0;
+            --card-bg: rgba(20, 20, 30, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', 'Orbitron', sans-serif;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700&display=swap');
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(189, 0, 255, 0.05) 0%, transparent 20%);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .cyber-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, var(--cyber-blue), var(--cyber-purple), var(--cyber-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--cyber-blue);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--cyber-purple), var(--cyber-pink));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(189, 0, 255, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pricing-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(0, 240, 255, 0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        
+        .pricing-card:hover::before {
+            left: 100%;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+            border-color: var(--cyber-blue);
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--cyber-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .card-features {
+            list-style: none;
+            margin-bottom: 20px;
+            text-align: left;
+            padding-left: 20px;
+        }
+        
+        .card-features li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .card-features li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--cyber-pink);
+        }
+        
+        .card-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .card-price span {
+            font-size: 1rem;
+            color: var(--cyber-blue);
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .popular-tag {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(45deg, var(--cyber-pink), var(--cyber-purple));
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(15deg);
+            box-shadow: 0 5px 15px rgba(255, 0, 247, 0.3);
+        }
+        
+        .cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--cyber-blue), var(--cyber-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .whatsapp-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        
+        .whatsapp-btn:hover::before {
+            left: 100%;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-btn i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .note {
+            text-align: center;
+            margin-top: 30px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .cyber-line {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cyber-blue), var(--cyber-purple), transparent);
+            margin: 40px 0;
+            border: none;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(189, 0, 255, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(189, 0, 255, 0.5); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(189, 0, 255, 0.3); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="cyber-grid"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="title">WANN HOSTING</h1>
+            <p class="subtitle">KEBUTUHAN JB DAN HOSTING <p>
+            <div class="badge">PROMO TERBATAS</div>
+        </header>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="card-title">WANN MEYEDIAKAN</h3>
+                <ul class="card-features">
+                    <li>TEM RESS</li>
+                    <li>ADNMIN TEM RESS</li>
+                    <li>PATNER JASTEB</li>
+                    <li>RESLER PANEL JASTEB</li>
+                    <li>MARGA JASTEB</li>
+                    <li>FAUDER MARGA<li>
+                    <li>JASTEB GACOR<li>
+                    <li>SEWA PANEL JASTEB</li>
+            </div>
+                      
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="card-title">WANN OPEN MURID</h3>
+                <ul class="card-features">
+                    <li>MURID LOGO</li>
+                    <li>MURUD SUNTIK</li>
+                    <li>MURID WEBSET</li>
+                    <li>MURID NEBAR</li>
+                    <li>MURID JPM</li>
+                    <li>MURID BUG WA<li>
+                    <li>MURID NOKOS<li>
+                    <li>RESLER PANEL RUN<li>
+                     <li>ADNMIN PANEL<li>
+            </div>
+
+
+            <div class="pricing-card">
+                <h3 class="card-title">WANN OPEN JASA/ECER PRODUK</h3>
+                <ul class="card-features">
+                    <li>NOKOS ALL NEGARA</li>
+                    <li>SUNTIK ALL SOMSED</li>
+                    <li>BUAT LOGO JB</li>
+                    <li>BUG WA GANAS</li>
+                    <li>SEWA BOT BUG</li>
+                    <li>SEWA BOT PUSHKOTAK</li>
+                    <li>PANEL RUN 1G -UNLI<li>
+                    <li>PEMBUTAN WEBSIT<li>
+                    <li>JASA PUS MEMBER<li>
+                    <li>WEB PISING UNCHEK<li>
+                </ul>
+            </div>
+   
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN TEM RESS</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN: 10K</li>
+                    <li>KEUTUGAN JOIN</li>
+                    <li>DAPAT 2 PANEL JASTEB</li>
+                    <li>BISA JUALAN JASTEB</li>
+                    <li>BISA JUALAN UNCHEK,BISA JULAN SEGEMAIL,BISA CEK CEK SEPUASNYA,BISA STOK AKUN MEX DAN SULTAN</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN TEM REAS" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN ADNMIN TEM RESS</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN: 20K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                    <li>bisa open pt jasteb,bisa open tem reas,bisa open jasteb,bisa open unchek,bisa jasteb sepuasnya,bisa cek cek sepuasnya,jamin panen stok akun,jamin balik modal jutan,ful dorogan dan bigbigan</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN ADMIN TEM REAS" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN RESLER PANEL JASTEB</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN: 25K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                    <li>bisa bikin panel jasteb,bisa jasteb sepuasnya,bisa jualan panel jasteb,bisa jualan unchek,bisa jualan segamil,bisa open tem/admin/patner</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN RESLER PANEL JASTEB" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN PATNER JASTEB</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN: 15K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>bisa jadi kang jasteb,bisa jasteb sepuas nya,bisa jadi kang unchek,bisa unchek sepuasnya,bisa jualan s gamil,bisa stok akun ber mex sama panen akun ber sg jamin balik modal bosss,gass join</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN PATNER JASTEB" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MARGA JASTEB</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN: 70K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>dapat 2 c panel,dapat 2 pusat add,dapat logo,adnmin 3 gb saya,di kasih tutor julaan,ful dorogan,bisa open resler panel,bisa open jasteb,bisa open sewa panel jasteb,bisa open tem dan adnmin,bisa open patner/onwer,res murni jamin bersii,ree deras fer detik,dan bayk lagi</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MARGA INDOSAD" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN FAUDER JASTEB</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN: 100K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>bisa open marga,dapat 2 c panel,dapat 2 pusat add,dapat logo,adnmin 3 gb saya,di kasih tutor julaan,ful dorogan,bisa open resler panel,bisa open jasteb,bisa open sewa panel jasteb,bisa open tem dan adnmin,bisa open patner/onwer,res murni jamin bersii,ree deras fer detik,dan bayk lagi,dapat pusat pribadi buat marga kamu</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN FAUDER INDOAS" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN JASTEB GACOR</h3>
+                <ul class="card-features">
+                    <li>5K = 100+JASTEB</li>
+                    <li>10K = 200+JASTEB</li>
+                   <li>15K = 300+JASTEB</li> 
+                   <li>20K = 400+JASTEB</li>
+                   <li>25K = 500+JASTEB</li>
+                   <li>30K = 600+JASTEB</li>
+                   <li>40K = 800+JASTEB</li>
+                   <li>50K = 1000+JASTEB</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG ORDER JASTEB GACOR" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN PANEL JASTEB VIIP</h3>
+                <ul class="card-features">
+                    <li>10K = 1 PANEL JASTEB/1 MINGGU</li>
+                    <li>20K = 2 PANEL JASTEB/1 MINGGU</li>
+                   <li>30K = 3 PANEL JASTEB/2 MINGGU</li> 
+                   <li>40K = 4 PANEL JASTEB/2 MINGUU</li>
+                   <li>50K = 5 PANEL JASTEB/3 MINGGU</li>
+                   <li>60K = 6 PANEL JASTEB/3 MINGGU</li>
+                   <li>70K = 8 PANEL JASTEB/4 MINGGU</li>
+                   <li>80K = 10 PANEL JASTEB/PERMNEN</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG SEWA PANEL JASTEB" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MURID LOGO</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 2K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa bikin logo jb pribadi,dapat bayak bawan,bisa julan logo,bisa jadi kang logo dan bayak lagi jamin balik modal</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MURID LOGO" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MURID SUNTIK</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 5K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa open jasa suntik all somsed,bisa suntuk saluran pribadi,bisa open jasa suntik,bisa suntik sepuasnya,dapat 13 web suntik dapat tutor ful acaran</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MURID SUNTIK" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MURID WEBSET</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 3K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa bikin web paymet/produk/dll pribadi,bisa open pembutan websait,bisa jualan web/coding dan bayak lagi permanen pasti nya</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MURID WEBSAIT" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MURID TEBAR</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 3K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa open ecer dapat all bahan nebar somsed,dapat bahan tutor nebar all somsed,dapat web pisng pribadi,bisa jualan web p,bisa stok akun fres </li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MURID NEBAR" class="whatsapp-btn">PESAN BOSS</a>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MURID JPM</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 3K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa open jasa push grup,bisa push grup pribadi,bisa jualan grup,bisa jadi kang jpm deras,dan bayak lagi</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MURID JPM" class="whatsapp-btn">PESAN BOSS</a>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MURID BUG WA</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 10K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa open jasa bug wa,bisa bug taman,bisa bug mantan,bug nya free,di add in 2 bot bug,jamin c1,permanen</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MURID BUG WA" class="whatsapp-btn">PESAN BOSS</a>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN MURID NOKOS</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 3K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa open jadi kang nokos,bisa jualan nokos all negara,bisa stoo nokos all negara,bisa pake wa tanpa kartu dan bayak lagi</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN MURID NOKOS" class="whatsapp-btn">PESAN BOSS</a>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN RESEREL PANEL RUN</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN : 5K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa open sewa panel run,bisa jualan panel 1-unli,bisa cerater panel sepuas nya,permanen,bisa sewa bot bug/pushkontak,bisa pushkotak,bisa open murbug</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN RESLER PANEL RUN" class="whatsapp-btn">PESAN BOSS</a>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN ADNMIN PANEL</h3>
+                <ul class="card-features">
+                    <li>HARGA JOIN :8K</li>
+                    <li>KEUTUGAN JOIN?</li>
+                   <li>BERIKUT➡️ bisa open relser panel,dapat adp,dapat sc c panel,bisa open sewa bot push+jpm+bug+jaga gb,bisa open murbug/owner bug,permanen pasti nya</li> 
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG JOIN ADNMIN PANEL" class="whatsapp-btn">PESAN BOSS</a>
+              </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN NOKOS ALL NEGARA</h3>
+                <ul class="card-features">
+                    <li>INDONESIA: 5K</li>
+                    <li>AFGANISTAN: 17K</li>
+                   <li>ANGOLA: 10K</li>
+                   <li>PHILIPINES:6K </li>
+                   <li>USA: 30K</li>
+                   <li>RUSIA: 15K</li>
+                   <li>CHINA: 20K</li>
+                   <li>VIETNAM: 8K</li>
+                   <li>ARGENTINA: 15K</li>
+                   <li>KANADA: 14K</li>
+                   <li>NEGARA LAIN TANYA AJA</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI NOKOS" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SUNTIK FOLOWER TIK TOK</h3>
+                <ul class="card-features">
+                    <li>100 FOLOWER: 3K</li>
+                    <li>200 FOLOWER: 6K</li>
+                    <li>400 FOLOWER: 10K</li>
+                    <li>600 FOLOWER: 13K</li>
+                    <li>800 FOLOWER: 20K</li>
+                    <li>1000 FOLOWER: 25K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI SUNTIK FOLOWER TIK TOK" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SUNTIK VIWES TIK TOK</h3>
+                <ul class="card-features">
+                    <li>1.000 VIWES :500p</li>
+                    <li>2.000 VIWES :1K</li>
+                    <li>5.000 VIWES :2K</li>
+                    <li>10.000 VIWES :3K</li>
+                    <li>20.000 VIWES :5K</li>
+                    <li>50.000 VIWES :7K</li>
+                    <li>100.000 VIWES :10K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI SUNTIK VIEWS TIK TOK" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+          
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SUNTIK LIKE TIK TOK</h3>
+                <ul class="card-features">
+                    <li>100 LIKE: 1K</li>
+                    <li>500 LIKE: 2K</li>
+                    <li>1.000 LIKE: 4K</li>
+                    <li>2.000 LIKE: 7K</li>
+                    <li>3.000 LIKE: 10K</li>
+                    <li>5.000 LIKE: 13K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI SUNTIK LIKE TIK TOK" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SUNTIK FOLOWER IG</h3>
+                <ul class="card-features">
+                    <li>100 FOLOWER: 2K</li>
+                    <li>200 FOLOWER: 4K</li>
+                    <li>500 FOLOWER: 15K</li>
+                    <li>1000 FOLOWER: 22K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI SUNTIK FOLOWER IG" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SUNTIK VIWES IG</h3>
+                <ul class="card-features">
+                    <li>1K VIWES : 1K</li>
+                    <li>2K VIWES : 2K</li>
+                    <li>5K VIWES : 5K</li>
+                    <li>10K VIWES : 8K</li>
+                    <li>50K VIWES : 12K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI SUNTIK VIEWS IG" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SUNTIK LIKE IG</h3>
+                <ul class="card-features">
+                    <li>1K LIKE : 2K</li>
+                    <li>2K LIKE : 4K</li>
+                    <li>5K LIKE : 7K</li>
+                    <li>8K LIKE : 8K</li>
+                    <li>9K LIKE : 9K</li>
+                    <li>10K LIKE : 10K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI SUNTIK LIKE IG" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SUNTIK PENIKUT SALURAN</h3>
+                <ul class="card-features">
+                    <li>100 PENGKIUT: 5K</li>
+                    <li>200 PENGKIUT: 10K</li>
+                    <li>300 PENGKIUT: 13K</li>
+                    <li>500 PENGKIUT: 17K</li>
+                    <li>700 PENGKIUT: 23K</li>
+                    <li>800 PENGKIUT: 25K</li>
+                    <li>1000 PENGKIUT: 30K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI SUNTIK SALURAN" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN BUAT LOGO ANK JB</h3>
+                <ul class="card-features">
+                    <li>ANIME : 1K</li>
+                    <li>TEAKS : 1K</li>
+                    <li>VEKTOR : 2K</li>
+                    <li>VEKTOR FF : 2K</li>
+                    <li>JB FF : 2K</li>
+                    <li>3D FF : 3K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI LOGO ANAK JB" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN JASA BUG WA</h3>
+                <ul class="card-features">
+                    <li>1 NO WA: 2K</li>
+                    <li>3 NO WA: 5K</li>
+                    <li>5 NO WA: 8K</li>
+                    <li>7 NO WA: 10K</li>
+                    <li>10 NO WA: 15K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI JASA BUG WA" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SEWA BOT BUG</h3>
+                <ul class="card-features">
+                    <li>3HARI : 5K 1X PASANG</li>
+                    <li>5HARI : 7K 2X PASANG</li>
+                    <li>7HARI : 8K 3X PASANG</li>
+                    <li>10HARI : 11K 3X PASANG</li>
+                    <li>15HARI : 15K 4X PASANG</li>
+                    <li>20HARI : 18K 5X PASANG</li>
+                    <li>30HARI : 25K 7X PASANG</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG SEWA BOT BUG WA" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN SEWA BOT PUSHKONTAK</h3>
+                <ul class="card-features">
+                    <li>3HARI : 5K 1X PASANG</li>
+                    <li>5HARI : 7K 2X PASANG</li>
+                    <li>7HARI : 8K 3X PASANG</li>
+                    <li>10HARI : 11K 3X PASANG</li>
+                    <li>15HARI : 15K 4X PASANG</li>
+                    <li>20HARI : 18K 5X PASANG</li>
+                    <li>30HARI : 25K 7X PASANG</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG SEWA PUSHLONTAK" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN PAMEL RUN</h3>
+                <ul class="card-features">
+                    <li>1 GB PRIVAT 1K/MINGGU</li>
+                    <li>2 GB PRIVAT 2K/MINGGU</li>
+                    <li>3 GB PRIVAT 3K/MINGGU</li>
+                    <li>5 GB PRIVAT 4K/MINGGU</li>
+                    <li>8 GB PRIVAT 5K/MINGGU</li>
+                    <li>10 GB PRIVAT 6K/MINGGU</li>
+                    <li>UNLI GB PRIVAT 7K/MINGGU</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI PANEL RUN" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN JASA PUSH MEMBER</h3>
+                <ul class="card-features">
+                    <li>5K : 15 MEMBER</li>
+                    <li>10K : 35 MEMBER</li>
+                    <li>15K : 50 MEMBER</li>
+                    <li>20K : 75 MEMBER</li>
+                    <li>25K : 100 MEMBER</li>
+                    <li>30K : 130 MEMBER</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI JASA PUSH MEMBER" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN PEMBUATAN WEBSAIT</h3>
+                <ul class="card-features">
+                    <li>WEB PAYMET: 2K</li>
+                    <li>WEB PRODUK: 5-30K</li>
+                    <li>WEB LING SOMSED : 2K</li>
+                    <li>WEB BOT/PANEL WA: 2K</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI PEMBUATAN WEBSIT" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+            <div class="pricing-card" style="border-color: var(--cyber-blue);">
+                <h3 class="card-title">OPEN WEB PISING</h3>
+                <ul class="card-features">
+                    <li>1 WEB : 2K/1 bulan</li>
+                    <li>2 WEB : 2K/1 bulan</li>
+                    <li>5 WEB : 4K/1 bulan</li>
+                    <li>10 WEB : 7K/permenen</li>
+                </ul>
+              </div>
+
+    <a href="https://wa.me/62881022832909?text=BANG BELI WEB PISING" class="whatsapp-btn">PESAN BOSS</a>
+          </div>
+
+        <hr class="cyber-line">
+        
+        <div class="cta">
+            <h3 class="cta-title">MINAT? HUBUNGI KAMI SEKARANG</h3>
+            <p style="margin-bottom: 20px; color: #ccc;">Klik tombol di bawah untuk pemesanan via WhatsApp</p>
+            <a href="https://wa.me/6283875646809" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> mangnanda
+            </a>
+        </div>
+        
+        <div class="note">
+            *ada harga ada kualitas,produk kami terjmin aman dan murah,trx don no all reff.
+        </div>
+    </div>
+    
+    <script>
+        // Add cyber effect to cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.pricing-card');
+            
+            cards.forEach(card => {
+                // Add random cyber effect
+                const effect = document.createElement('div');
+                effect.style.position = 'absolute';
+                effect.style.bottom = '0';
+                effect.style.left = '0';
+                effect.style.width = '100%';
+                effect.style.height = '3px';
+                effect.style.background = `linear-gradient(90deg, transparent, ${getRandomColor()}, transparent)`;
+                effect.style.opacity = '0.7';
+                card.appendChild(effect);
+                
+                // Add hover effect
+                card.addEventListener('mouseenter', function() {
+                    effect.style.background = `linear-gradient(90deg, transparent, ${getRandomColor()}, transparent)`;
+                });
+            });
+            
+            function getRandomColor() {
+                const colors = ['#00f0ff', '#bd00ff', '#ff00f7'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+        });
+    </script>
+</body>
+</html>
